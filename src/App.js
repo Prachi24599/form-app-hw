@@ -11,10 +11,16 @@ function App() {
     city: "",
     state: "",
     postalCode: "",
+    comments: false,
+    candidates: false,
+    offers: false,
   });
   function changeHandler(event) {
     const { name, value, checked, type } = event.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   }
   console.log(formData);
   return (
@@ -102,6 +108,48 @@ function App() {
           value={formData.postalCode}
           onChange={changeHandler}
         />
+        <fieldset>
+          <legend>By Email</legend>
+          <div className="flex">
+            <input
+              type="checkbox"
+              id="comments"
+              name="comments"
+              value={formData.comments}
+              onChange={changeHandler}
+            />
+            <div>
+              <label htmlFor="comments">Comments</label>
+              <p>Get notified when someones posts a comment on a posting.</p>
+            </div>
+          </div>
+          <div className="flex">
+            <input
+              type="checkbox"
+              id="candidates"
+              name="candidates"
+              value={formData.candidates}
+              onChange={changeHandler}
+            />
+            <div>
+              <label htmlFor="candidates">Candidates</label>
+              <p>Get notified when a candidate applies for a job.</p>
+            </div>
+          </div>
+          <div className="flex">
+            <input
+              type="checkbox"
+              id="offers"
+              name="offers"
+              value={formData.offers}
+              onChange={changeHandler}
+            />
+            <div>
+              <label htmlFor="offers">Offers</label>
+              <p>Get notified when a candidate accepts or rejects an offer.</p>
+            </div>
+          </div>
+        </fieldset>
       </form>
     </div>
   );
