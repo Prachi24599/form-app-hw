@@ -1,3 +1,4 @@
+import { eventWrapper } from "@testing-library/user-event/dist/utils";
 import "./App.css";
 import React, { useState } from "react";
 
@@ -14,6 +15,7 @@ function App() {
     comments: false,
     candidates: false,
     offers: false,
+    pushNotifications: "",
   });
   function changeHandler(event) {
     const { name, value, checked, type } = event.target;
@@ -22,10 +24,16 @@ function App() {
       [name]: type === "checkbox" ? checked : value,
     }));
   }
-  console.log(formData);
+
+  function submitHandler(event) {
+    event.preventDefault();
+    console.log("Printing value of form data");
+    console.log(formData);
+  }
+
   return (
     <div className="App">
-      <form>
+      <form onSubmit={submitHandler}>
         <label htmlFor="firstName">First name</label>
         <input
           type="text"
@@ -150,6 +158,36 @@ function App() {
             </div>
           </div>
         </fieldset>
+
+        <fieldset>
+          <legend>Push Notification</legend>
+          <p>These are delivered via SMS to your mobile phone.</p>
+          <input
+            type="radio"
+            id="pushEverything"
+            name="pushNotifications"
+            value="Everything"
+            onChange={changeHandler}
+          />
+          <label htmlFor="pushEverything">Everything</label>
+          <input
+            type="radio"
+            id="pushEmail"
+            name="pushNotifications"
+            value="Same as Email"
+            onChange={changeHandler}
+          />
+          <label htmlFor="pushEmail">Same as Email</label>
+          <input
+            type="radio"
+            id="pushNothing"
+            name="pushNotifications"
+            value="No push notifications"
+            onChange={changeHandler}
+          />
+          <label htmlFor="pushNothing">No push notifications</label>
+        </fieldset>
+        <button>Save</button>
       </form>
     </div>
   );
