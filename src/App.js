@@ -115,7 +115,7 @@ function App() {
               type="checkbox"
               id="comments"
               name="comments"
-              value={formData.comments}
+              checked={formData.comments}
               onChange={changeHandler}
             />
             <div>
@@ -128,7 +128,7 @@ function App() {
               type="checkbox"
               id="candidates"
               name="candidates"
-              value={formData.candidates}
+              checked={formData.candidates}
               onChange={changeHandler}
             />
             <div>
@@ -141,7 +141,7 @@ function App() {
               type="checkbox"
               id="offers"
               name="offers"
-              value={formData.offers}
+              checked={formData.offers}
               onChange={changeHandler}
             />
             <div>
